@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class CalculadoraSalarial
 {
     private double salarioBase;
@@ -17,6 +16,7 @@ public class CalculadoraSalarial
     {
         this.alimentacao = 2122;
     }
+
    public void calcularSalario()
     {
         this.informarSalario();
@@ -24,6 +24,11 @@ public class CalculadoraSalarial
         this.calcularDescontos();
         this.gerarRelatorioSalarial();
     }
+
+    /**
+     * Faz a captura do salário base digitado pelo usuario.
+     *
+     */
    private void informarSalario()
     {
         System.out.println("Digite seu Salário R$ : ");
@@ -32,6 +37,10 @@ public class CalculadoraSalarial
         scanner.close();
     }
 
+    /**
+     * Faz o calculo dos beneficios e adiciona ao valor do salário base.
+     *
+     */
    private void calcularBeneficios()
     {
         this.alimentacao = 2122;
@@ -41,6 +50,10 @@ public class CalculadoraSalarial
         this.adicionais = this.AQFC + this.AQE;
     }
 
+    /**
+     * Faz o calculo dos descontos e deduz o valor do salário base.
+     *
+     */
    private void calcularDescontos()
     {
         this.descontoIRRF = calcularAlicotaIRRF();
@@ -52,24 +65,37 @@ public class CalculadoraSalarial
 
     /**
      * Faz a adição de uma porcentagem ao salario base
-     * @return
      */
     private double gratificacaoAtividadeJudiciaria()
     {
         double porcentagem = 30; // A porcentagem a ser somada (30% )
         return this.salarioBase * (porcentagem / 100);
     }
+
+    /**
+     * Faz a adição de uma porcentagem ao salario base
+     *
+     */
     private double adicionalQualicicacaoContinuada()
     {
         double porcentagem = 3;
         return this.salarioBase * (porcentagem / 100);
     }
+
+    /**
+     * Faz a adição de uma porcentagem ao salario base
+     *
+     */
     private double adicionalQualificacaoEstavel()
     {
         double porcentagem = 7.5;
         return this.salarioBase * (porcentagem / 100);
     }
 
+    /**
+     * Calcula o Imposto de renda baseado na tabela de calculo referente o ano de 2024.
+     *
+     */
     private double calcularAlicotaIRRF()
     {
         this.verificarSalarioNegativo();
@@ -86,6 +112,10 @@ public class CalculadoraSalarial
         return this.salarioBase * 0.275;
     }
 
+    /**
+     * Calcula o Alicota do INSS baseado na tabela de calculo referente o ano de 2024.
+     *
+     */
     private double calcularAlicotaINSS()
     {
         this.verificarSalarioNegativo();
@@ -102,12 +132,20 @@ public class CalculadoraSalarial
         return this.salarioBase * 0.14;
     }
 
+    /**
+     * Verifica se salário digitado pelo usuario não é negativo.
+     *
+     */
    private void verificarSalarioNegativo()
     {
         if (this.salarioBase < 0)
             throw new IllegalArgumentException("O número não pode ser negativo.");
     }
 
+    /**
+     * Gera o relatório salarial baseado no salario base com adicao dos beneficios e subitracao do INSS e IRRF.
+     *
+     */
    private void gerarRelatorioSalarial()
     {
         System.out.println("\n***************Relatório Salarial***************\n");
